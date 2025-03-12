@@ -8,7 +8,7 @@ const creditPackageRouter = require('./routes/creditPackage')
 const skillRouter = require('./routes/skill')
 const userRouter = require('./routes/users')
 const adminRouter = require('./routes/admin')
-const coachRouter = require('./routes/coach')
+const coachRouter = require('./routes/coaches')
 const coursesRouter = require('./routes/courses')
 
 const app = express()

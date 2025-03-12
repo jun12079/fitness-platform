@@ -23,11 +23,12 @@ module.exports = new EntitySchema({
             nullable: false,
             createDate: true,
         },
-        // status: {
-        //     type: "varchar",
-        //     length: 20,
-        //     nullable: false,
-        // },
+        status: {
+            type: "varchar",
+            length: 20,
+            nullable: false,
+            default: "pending",
+        },
         join_at: {
             type: "timestamp",
             nullable: true,
