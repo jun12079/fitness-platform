@@ -62,7 +62,6 @@ const userController = {
                 return next(appError(400, "密碼不符合規則，需要包含英文數字大小寫，最短8個字，最長16個字"));
             }
 
-
             const userRepo = dataSource.getRepository('User')
             // 使用者不存在或密碼輸入錯誤
             const findUser = await userRepo.findOne({
@@ -155,9 +154,8 @@ const userController = {
             }
 
             res.status(200).json({
-                status: 'success',
+                status: 'success'
             })
-
         } catch (error) {
             logger.error('取得使用者資料錯誤:', error)
             next(error)
@@ -276,7 +274,6 @@ const userController = {
                 ])
                 .getRawMany();
 
-
             res.status(200).json({
                 status: 'success',
                 data: {
@@ -285,7 +282,6 @@ const userController = {
                     course_booking: courseBookingResult
                 }
             })
-
         } catch (error) {
             logger.error('伺服器錯誤:', error)
             next(error)

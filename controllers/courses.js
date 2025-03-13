@@ -6,7 +6,6 @@ const logger = require('../utils/logger')('User');
 const courseController = {
     async getCourses(req, res, next) {
         try {
-            const courseRepo = dataSource.getRepository('Course');
             const data = await dataSource
                 .getRepository('Course')
                 .createQueryBuilder('course')
@@ -66,7 +65,7 @@ const courseController = {
             const courseBookingCount = await courseBookingRepo.count({
                 where: {
                     user_id: id,
-                    cancelled_at: IsNull(),
+                    cancelled_at: IsNull()
                 }
             });
             if (courseBookingCount >= creditPurchase) {
@@ -127,7 +126,7 @@ const courseController = {
             logger.error(error);
             next(error);
         }
-    },
+    }
 };
 
 module.exports = courseController;

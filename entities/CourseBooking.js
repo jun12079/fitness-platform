@@ -8,48 +8,48 @@ module.exports = new EntitySchema({
             primary: true,
             type: "uuid",
             generated: "uuid",
-            nullable: false,
+            nullable: false
         },
         user_id: {
             type: "uuid",
-            nullable: false,
+            nullable: false
         },
         course_id: {
             type: "uuid",
-            nullable: false,
+            nullable: false
         },
         booking_at: {
             type: "timestamp",
             nullable: false,
-            createDate: true,
+            createDate: true
         },
         status: {
             type: "varchar",
             length: 20,
             nullable: false,
-            default: "pending",
+            default: "pending"
         },
         join_at: {
             type: "timestamp",
-            nullable: true,
+            nullable: true
         },
         leave_at: {
             type: "timestamp",
-            nullable: true,
+            nullable: true
         },
         cancelled_at: {
             type: "timestamp",
-            nullable: true,
+            nullable: true
         },
         cancellation_reason: {
             type: "varchar",
             length: 255,
-            nullable: true,
+            nullable: true
         },
         created_at: {
             type: "timestamp",
             nullable: false,
-            createDate: true,
+            createDate: true
         }
     },
     relations: {

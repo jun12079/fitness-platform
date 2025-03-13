@@ -8,39 +8,39 @@ module.exports = new EntitySchema({
             primary: true,
             type: "uuid",
             generated: "uuid",
-            nullable: false,
+            nullable: false
         },
         name: {
             type: 'varchar',
             length: 50,
-            nullable: false,
+            nullable: false
         },
         email: {
             type: 'varchar',
             length: 320,
             nullable: false,
-            unique: true,
+            unique: true
         },
         role: {
             type: 'varchar',
             length: 20,
-            nullable: false,
+            nullable: false
         },
         password: {
             type: 'varchar',
             length: 72,
             nullable: false,
-            select: false,
+            select: false
         },
         created_at: {
             type: 'timestamp',
             nullable: false,
-            createDate: true,
+            createDate: true
         },
         updated_at: {
             type: 'timestamp',
             nullable: false,
-            updateDate: true,
+            updateDate: true
         }
     }
 })

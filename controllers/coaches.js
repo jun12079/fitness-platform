@@ -19,7 +19,7 @@ const coachesController = {
                 select: {
                     id: true,
                     User: {
-                        name: true,
+                        name: true
                     }
                 },
                 skip: (page - 1) * per,
@@ -28,7 +28,7 @@ const coachesController = {
             const result = coaches.map(coach => {
                 return {
                     id: coach.id,
-                    name: coach.User.name,
+                    name: coach.User.name
                 }
             })
 
@@ -126,7 +126,7 @@ const coachesController = {
             logger.error(error)
             next(error)
         }
-    },
+    }
 };
 
 module.exports = coachesController;

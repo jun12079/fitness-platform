@@ -41,7 +41,7 @@ app.use('/api/courses', coursesRouter)
 app.use((req, res, next) => {
 	res.status(404).json({
 		status: 'error',
-		message: "無此路由",
+		message: "無此路由"
 	})
 	return
 });

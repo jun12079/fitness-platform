@@ -3,7 +3,6 @@ const appError = require('../utils/appError');
 const logger = require('../utils/logger')('SkillController');
 const { isValidString } = require('../utils/validUtils');
 
-
 const skillController = {
     async getSkill(req, res, next) {
         try {
@@ -12,9 +11,10 @@ const skillController = {
             })
             res.status(200).json({
                 status: "success",
-                data: data,
+                data
             })
         } catch (error) {
+            logger.error(error)
             next(error)
         }
     },
@@ -65,7 +65,7 @@ const skillController = {
                 return;
             }
             res.status(200).json({
-                status: "success",
+                status: "success"
             })
         } catch (error) {
             next(error)

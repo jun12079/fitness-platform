@@ -12,7 +12,15 @@
     },
     "rules": {
         "no-restricted-syntax": ["error", "WithStatement", "BinaryExpression[operator='in']"],
-        "max-len": ["error", { "code": 160 }]
+        "max-len": ["error", { "code": 160 }],
+        "eol-last": "off",  // 檔案結尾空行設定
+        "semi": "off",  // 結尾分號設定
+        "indent": "off",    // 縮排設定
+        "no-tabs": "off",   // 允不允許tab設定
+        "space-before-function-paren": "off",   // 函數名稱後面空格設定
+        "quotes": "off",    // 單雙引號設定
+        "no-useless-return": "off", // 無用return設定
+        "camelcase": "off"  // 駝峰命名設定
     },
     "ignorePatterns": ["migrations/**/*.js"]
 }

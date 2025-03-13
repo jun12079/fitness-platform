@@ -8,21 +8,21 @@ module.exports = new EntitySchema({
             primary: true,
             type: "uuid",
             generated: "uuid",
-            nullable: false,
+            nullable: false
         },
         coach_id: {
             type: "uuid",
-            nullable: false,
+            nullable: false
         },
         skill_id: {
             type: "uuid",
-            nullable: false,
+            nullable: false
         },
         created_at: {
             type: "timestamp",
             nullable: false,
-            createDate: true,
-        },
+            createDate: true
+        }
     },
     relations: {
         Coach: {

@@ -38,7 +38,6 @@ const adminController = {
                     skill_ids: skillIds.map(skill => skill.skill_id)
                 }
             })
-
         } catch (error) {
             logger.error(error)
             next(error)
@@ -111,7 +110,6 @@ const adminController = {
                     skill_ids: skillIds.map(skill => skill.skill_id)
                 }
             })
-
         } catch (error) {
             logger.error(error)
             next(error)
@@ -122,9 +120,9 @@ const adminController = {
             // TODO 可以做檢查日期格式
             // 可以用 moment
             const { user_id, skill_id, name, description, start_at, end_at, max_participants, meeting_url } = req.body
-            if (!isValidString(user_id) || !isValidString(skill_id) || !isValidString(name)
-                || !isValidString(description) || !isValidString(start_at) || !isValidString(end_at)
-                || !isNumber(max_participants) || !isValidString(meeting_url) || !meeting_url.startsWith('https')) {
+            if (!isValidString(user_id) || !isValidString(skill_id) || !isValidString(name) ||
+                !isValidString(description) || !isValidString(start_at) || !isValidString(end_at) ||
+                !isNumber(max_participants) || !isValidString(meeting_url) || !meeting_url.startsWith('https')) {
                 return next(appError(400, "欄位未填寫正確"));
             }
 
@@ -177,10 +175,10 @@ const adminController = {
             // TODO 可以做檢查日期格式
             // 可以用 moment
             const { skill_id, name, description, start_at, end_at, max_participants, meeting_url } = req.body
-            if (!isValidString(courseId)
-                || !isValidString(skill_id) || !isValidString(name)
-                || !isValidString(description) || !isValidString(start_at) || !isValidString(end_at)
-                || !isNumber(max_participants) || !isValidString(meeting_url) || !meeting_url.startsWith('https')) {
+            if (!isValidString(courseId) ||
+                !isValidString(skill_id) || !isValidString(name) ||
+                !isValidString(description) || !isValidString(start_at) || !isValidString(end_at) ||
+                !isNumber(max_participants) || !isValidString(meeting_url) || !meeting_url.startsWith('https')) {
                 return next(appError(400, "欄位未填寫正確"));
             }
 
@@ -326,15 +324,13 @@ const adminController = {
                     status = '已結束';
                 }
 
-                const participants = courseBookingCount.map(courseBooking => {
-                    if (courseBooking.course_id === course.id) {
-                        return courseBooking.count
-                    }
-                })
+                const participants = courseBookingCount
+                    .filter(courseBooking => courseBooking.course_id === course.id)
+                    .map(courseBooking => courseBooking.count);
 
                 return {
                     id: course.id,
-                    status: status,
+                    status,
                     name: course.name,
                     start_at: course.start_at,
                     end_at: course.end_at,
@@ -347,7 +343,6 @@ const adminController = {
                 status: "success",
                 data: result
             })
-
         } catch (error) {
             logger.error(error)
             next(error)
@@ -355,13 +350,11 @@ const adminController = {
     },
     async getCoachCourse(req, res, next) {
         try {
-            const { id } = req.user;
             const { courseId } = req.params;
             if (!isValidUUID(courseId) || !isValidString(courseId)) {
                 return next(appError(400, "欄位未填寫正確"));
             }
 
-            const courseRepo = dataSource.getRepository("Course")
             const courses = await dataSource
                 .getRepository('Course')
                 .createQueryBuilder('course')
@@ -386,7 +379,6 @@ const adminController = {
                 status: "success",
                 data: courses
             })
-
         } catch (error) {
             logger.error(error)
             next(error)
@@ -458,7 +450,7 @@ const adminController = {
             logger.error(error)
             next(error)
         }
-    },
+    }
 };
 
 module.exports = adminController;

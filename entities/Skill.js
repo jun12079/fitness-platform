@@ -8,7 +8,7 @@ module.exports = new EntitySchema({
             primary: true,
             type: "uuid",
             generated: "uuid",
-            nullable: false,
+            nullable: false
         },
         name: {
             type: "varchar",
@@ -19,7 +19,7 @@ module.exports = new EntitySchema({
         created_at: {
             type: "timestamp",
             nullable: false,
-            createDate: true,
-        },
-    },
+            createDate: true
+        }
+    }
 })

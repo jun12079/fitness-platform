@@ -1,4 +1,5 @@
 const { dataSource } = require('../db/data-source')
+const appError = require('../utils/appError');
 const logger = require('../utils/logger')('CreditPackage')
 const { isValidString, isNumber } = require('../utils/validUtils')
 
@@ -10,7 +11,7 @@ const creditPackageController = {
             })
             res.status(200).json({
                 status: "success",
-                data: creditPackages,
+                data: creditPackages
             })
         } catch (error) {
             next(error)
@@ -43,10 +44,11 @@ const creditPackageController = {
             const result = await creditPackage.save(newCreditPackage)
             res.status(200).json({
                 status: "success",
-                data: result,
+                data: result
             })
         } catch (error) {
-            sendErrorResponse(res)
+            logger.error(error)
+            next(error)
         }
     },
     async deleteCreditPackage(req, res, next) {
@@ -62,7 +64,7 @@ const creditPackageController = {
                 return;
             }
             res.status(200).json({
-                status: "success",
+                status: "success"
             })
         } catch (error) {
             next(error)
@@ -97,12 +99,12 @@ const creditPackageController = {
 
             res.status(201).json({
                 status: "success",
-                data: null,
+                data: null
             })
         } catch (error) {
             next(error)
         }
-    },
+    }
 };
 
 module.exports = creditPackageController;
