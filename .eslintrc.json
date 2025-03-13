@@ -22,5 +22,8 @@
         "no-useless-return": "off", // 無用return設定
         "camelcase": "off"  // 駝峰命名設定
     },
-    "ignorePatterns": ["migrations/**/*.js"]
+    "ignorePatterns": [
+        "migrations/**/*.js",
+        "node_modules/**"
+    ]
 }
