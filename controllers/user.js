@@ -5,7 +5,7 @@ const { generateJWT } = require('../utils/jwtUtils')
 const appError = require('../utils/appError');
 const bcrypt = require('bcrypt');
 const { IsNull } = require('typeorm');
-const saltRounds = 10;
+const saltRounds = parseInt(process.env.SALT_ROUNDS, 10) || 10;
 
 const userController = {
     async createUser(req, res, next) {

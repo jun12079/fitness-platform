@@ -7,7 +7,8 @@ const skillController = {
     async getSkill(req, res, next) {
         try {
             const data = await dataSource.getRepository("Skill").find({
-                select: ["id", "name"]
+                select: ["id", "name"],
+                order: { name: "ASC" }
             })
             res.status(200).json({
                 status: "success",
@@ -27,12 +28,10 @@ const skillController = {
             }
 
             const skillRepo = dataSource.getRepository("Skill")
-            const findSkill = await skillRepo.find({
-                where: {
-                    name
-                }
-            })
-            if (findSkill.length > 0) {
+            const isExist = await skillRepo.createQueryBuilder("skill")
+                .where("skill.name = :name", { name })
+                .getExists();
+            if (isExist) {
                 next(appError(409, "資料重複"));
                 return;
             }

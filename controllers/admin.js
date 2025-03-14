@@ -255,36 +255,35 @@ const adminController = {
                 return next(appError(409, "使用者已經是教練"));
             }
 
-            const updateUser = await userRepo.update({
-                id: userId
-            }, {
-                role: 'COACH'
-            })
-            if (updateUser.affected === 0) {
-                return next(appError(400, "更新使用者失敗"));
-            }
-
-            const coachRepo = dataSource.getRepository("Coach")
-            const newCoach = coachRepo.create({
-                user_id: userId,
-                experience_years,
-                description,
-                profile_image_url
-            })
-            const coachResult = await coachRepo.save(newCoach)
-            const userResult = await userRepo.findOne({
-                where: {
+            const result = await dataSource.transaction(async transactionalEntityManager => {
+                const updateUser = await transactionalEntityManager.update("User", {
                     id: userId
+                }, {
+                    role: 'COACH'
+                })
+                if (updateUser.affected === 0) {
+                    return next(appError(400, "更新使用者失敗"));
                 }
+                const newCoach = transactionalEntityManager.create("Coach", {
+                    user_id: userId,
+                    experience_years,
+                    description,
+                    profile_image_url
+                })
+                const coachResult = await transactionalEntityManager.save("Coach", newCoach)
+
+                const userResult = await transactionalEntityManager.findOne("User", {
+                    where: { id: userId },
+                    select: ["name", "role"]
+                });
+
+                return { userResult, coachResult };
             })
             res.status(201).json({
                 status: "success",
                 data: {
-                    user: {
-                        name: userResult.name,
-                        role: userResult.role
-                    },
-                    coach: coachResult
+                    user: result.userResult,
+                    coach: result.coachResult
                 }
             })
         } catch (error) {
